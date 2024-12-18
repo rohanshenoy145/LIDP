@@ -10,6 +10,13 @@ import java.util.ArrayList;
 
 public class CustomerMapper{
 
+    final AddressRepository addressRepository;
+    final CustomerRepository customerRepository;
+    @Autowired
+    public CustomerMapper(CustomerRepository customerRepository,AddressRepository addressRepository) {
+        this.customerRepository = customerRepository;
+        this.addressRepository = addressRepository;
+    }
     
 
     public CustomerAPI toCustomerAPI(CustomerEntity customerEntity){
@@ -45,6 +52,7 @@ public class CustomerMapper{
             customerEntity = new CustomerEntity()
             customerEntity.setId(customerAPI.getId());
             customerEntity.setName(customerAPI.getName());
+            //addresses initially empty 
         }
         return customerEntity;
     }

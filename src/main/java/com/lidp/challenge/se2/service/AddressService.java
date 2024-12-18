@@ -19,7 +19,7 @@ public class AddressService {
     final AddressRepository addressRepository;
     final CustomerRepository customerRepository;
     @Autowired
-    public AddressService(CustomerRepository customerRepository) {
+    public AddressService(CustomerRepository customerRepository,AddressRepository addressRepository) {
         this.customerRepository = customerRepository;
         this.addressRepository = addressRepository;
     }
@@ -31,11 +31,14 @@ public class AddressService {
 
         }
         addressEntity.setCustomer(customer);
+        customer.getAddresses().add(addressEntity);
+        customer.setAddresses(customer.getAddresses());
+        this.customerRepository.save(customer);
         this.addressRepository.save(addressEntity);
     }
 
     public List <AddressEntity> findAddresses(final Integer customerId){
-        CustomerEntity customer = this.customerRepository.findById(customerId)
+        CustomerEntity customer = this.customerRepository.findById(customerId);
         if customer == null{
             throw new RuntimeException("Customer with ID " + customerId + " does not exist");
 
@@ -55,8 +58,10 @@ public class AddressService {
         if address == null{
             throw new RuntimeException("Address with ID " + addressId + " does not exist");
         }
+        CustomerEntity customerEntity = address.getCustomer();
+        customerEntity.getAddresses().remove(address); //should delete from database too due to orphanage
+        this.customerRepository.save(customerEntity);
 
-        this.addressRepository.delete(address);
 
         
     }

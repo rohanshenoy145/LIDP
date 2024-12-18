@@ -13,15 +13,19 @@ import java.util.ArrayList;
 
 
 
+
 import java.util.List;
 
 @Service
 public class CustomerService {
   final CustomerRepository customerRepository;
+  final AddressRepository addressRepository;
+
 
   @Autowired
-  public CustomerService(CustomerRepository customerRepository) {
+  public CustomerService(CustomerRepository customerRepository,AddressRepository addressRepository) {
     this.customerRepository = customerRepository;
+    this.addressRepository = addressRepository;
   }
 
   public void save(final CustomerEntity customerEntity) {
@@ -51,6 +55,7 @@ public class CustomerService {
   }
 
   public void deleteById(final Integer id) {
+    
     this.customerRepository.deleteById(id);
   }
 }

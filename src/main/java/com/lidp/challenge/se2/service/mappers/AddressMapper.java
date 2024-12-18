@@ -11,10 +11,13 @@ import java.util.ArrayList;
 
 
 public class AddressMapper{
-    private CustomerMapper customerMapper;
 
-    public AddressMapper(CustomerMapper customerMapper){
-        this.customerMapper = customerMapper;
+    final AddressRepository addressRepository;
+    final CustomerRepository customerRepository;
+    @Autowired
+    public AddressMapper(CustomerRepository customerRepository,AddressRepository addressRepository) {
+        this.customerRepository = customerRepository;
+        this.addressRepository = addressRepository;
     }
 
     public AddressAPI toAddressAPI(AddressEntity addressEntity){
@@ -27,7 +30,7 @@ public class AddressMapper{
         CustomerAPI customerAPI = new CustomerAPI();
         customerAPI.setId(addressEntity.getCustomer().getId());
         customerAPI.setName(addressEntity.getCustomer().getName());
-        addressAPI.setCustomer(customerAPI)
+        addressAPI.setCustomer(customerAPI);
         return addressAPI;
     }
 
@@ -47,7 +50,7 @@ public class AddressMapper{
     public AddressEntity toAddressEntity(AddressAPI addressAPI){
         AddressEntity addressEntity = addressRepository.findById(addressAPI.getId()).orElse(null);
         if addressEntity == null{
-            adressEntity = new AddressEntity()
+            addressEntity = new AddressEntity()
             addressEntity.setId(addressAPI.getId());
             addressEntity.setStreetName(addressAPI.getStreetName());
             addressEntity.setCityName(addressAPI.getCityName());
