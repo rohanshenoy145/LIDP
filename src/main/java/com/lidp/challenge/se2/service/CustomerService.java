@@ -6,6 +6,10 @@ import com.lidp.challenge.se2.persistence.entity.CustomerEntity;
 import com.lidp.challenge.se2.persistence.dao.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.lidp.challenge.se2.domain.CustomerAPI;
+import com.lidp.challenge.se2.domain.AddressAPI;
+
+
 
 import java.util.List;
 

@@ -20,7 +20,7 @@ public class CustomerEntity {
 
 
   @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
-  private List <AndressEntity> customerAddresses;
+  private List <AddressEntity> customerAddresses;
 
   
   public int getId() {
@@ -43,11 +43,11 @@ public class CustomerEntity {
     return customerAddresses;
   }
 
-  public void setAddresses(List<AdrressEntity>customerAddresses){
+  public void setAddresses(List<AddressEntity>customerAddresses){
     this.customerAddresses = customerAddresses
   }
 
-  
+
 
 
 }
