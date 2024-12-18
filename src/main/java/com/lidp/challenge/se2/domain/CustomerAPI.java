@@ -4,7 +4,7 @@ package com.lidp.challenge.se2.domain;
 public class CustomerAPI{
     private int id;
     private String name;
-    private List <AddressAPI> addresses;
+    private List<AddressAPI> addresses = new ArrayList<>(); 
 
     public int getId(){
         return id;
