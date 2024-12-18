@@ -18,6 +18,11 @@ public class CustomerEntity {
   @Column
   private String name;
 
+
+  @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
+  private List <AndressEntity> customerAddresses;
+
+  
   public int getId() {
     return id;
   }
@@ -33,4 +38,16 @@ public class CustomerEntity {
   public void setName(String name) {
     this.name = name;
   }
+
+  public List<AddressEntity> getAddresses(){
+    return customerAddresses;
+  }
+
+  public void setAddresses(List<AdrressEntity>customerAddresses){
+    this.customerAddresses = customerAddresses
+  }
+
+  
+
+
 }

@@ -1,6 +1,7 @@
 package com.lidp.challenge.se2.controller;
 
 import com.lidp.challenge.se2.persistence.entity.CustomerEntity;
+import com.lidp.challenge.se2.persistence.entity.AddressEntity;
 import com.lidp.challenge.se2.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,32 +15,59 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("")
 public class CustomerController {
   private final CustomerService customerService;
+  private final AddressService addressService;
 
   @Autowired
   public CustomerController(CustomerService customerService) {
     this.customerService = customerService;
+    this.addressService = addressService;
   }
 
-  @PostMapping
+  @PostMapping("/customers")
   public void save(@RequestBody CustomerEntity customerEntity) {
     this.customerService.save(customerEntity);
   }
 
-  @GetMapping
+  @GetMapping("/customers")
   public List<CustomerEntity> findAll() {
     return this.customerService.findAll();
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("/customers/{id}")
   public CustomerEntity findById(@PathVariable Integer id) {
     return this.customerService.findById(id);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/customers/{id}")
   public void deleteById(@PathVariable Integer id) {
     this.customerService.deleteById(id);
   }
+
+  @PostMapping ("/addresses/{id}")
+  public void addAddress(@PathVariable Integer id,@RequestBody AddressEntity addressEntity){
+    this.addressService.addAddress(id,addressEntity);
+
+  }
+
+  @GetMapping ("/addresses")
+  public List <AddressEntity> findAllAddresses(){
+    return this.addressService.findAllAddresses();
+  }
+
+  @GetMapping("/addresses/{id}")
+  public List <AddressEntity> findAddressesById(@PathVariable Integer id){
+    return this.addressService.findAddresses(id);
+  }
+
+  @DeleteMapping("/addresses/{id}")
+  public void deleteAddress(@PathVariable Integer id){
+    this.addressService.deleteAddress(id);
+  }
+
+
+
+
 }
