@@ -4,6 +4,8 @@ import com.lidp.challenge.se2.persistence.entity.AddressEntity;
 import com.lidp.challenge.se2.persistence.entity.CustomerEntity;
 import com.lidp.challenge.se2.domain.CustomerAPI;
 import com.lidp.challenge.se2.service.mapper.CustomerMapper;
+import java.util.List;
+import java.util.ArrayList;
 
 
 
@@ -22,8 +24,10 @@ public class AddressMapper{
         addressAPI.setCityName(addressEntity.getCityName());
         addressAPI.setStateName(addressEntity.getStateName());
         addressAPI.setZipCode(addressEntity.getZipCode());
-        CustomerAPI customerAPI = CustomerMapper.toCustomerAPI(addressEntity.getCustomer());
-        addressAPI.setCustomer(customerAPI);
+        CustomerAPI customerAPI = new CustomerAPI();
+        customerAPI.setId(addressEntity.getCustomer().getId());
+        customerAPI.setName(addressEntity.getCustomer().getName());
+        addressAPI.setCustomer(customerAPI)
         return addressAPI;
     }
 
@@ -36,15 +40,24 @@ public class AddressMapper{
 
     }
 
+
+
+
+
     public AddressEntity toAddressEntity(AddressAPI addressAPI){
-        AddressEntity addressEntity = new AddressEntity()
-        addressEntity.setId(addressAPI.getId());
-        addressEntity.setStreetName(addressAPI.getStreetName());
-        addressEntity.setCityName(addressAPI.getCityName());
-        addressEntity.setStateName(addressAPI.getStateName());
-        addressEntity.setZipCode(addressAPI.getZipCode());
-        CustomerEntity customerEntity = customerMapper.toCustomerEntity(addressAPI.getCustomer());
-        addressEntity.setCustomer(customerEntity);
+        AddressEntity addressEntity = addressRepository.findById(addressAPI.getId()).orElse(null);
+        if addressEntity == null{
+            adressEntity = new AddressEntity()
+            addressEntity.setId(addressAPI.getId());
+            addressEntity.setStreetName(addressAPI.getStreetName());
+            addressEntity.setCityName(addressAPI.getCityName());
+            addressEntity.setStateName(addressAPI.getStateName());
+            addressEntity.setZipCode(addressAPI.getZipCode());
+            //customer should be set in services
+
+        }
+
+
         return addressEntity;
 
     }
@@ -52,8 +65,11 @@ public class AddressMapper{
     public List <AddressEntity> toAddressEntityList(List <AddressAPI> addressAPIs){
         List <AddressEntity> addressEntities = new ArrayList<>();
         for(AddressAPI addressAPI: addressAPIs){
-            addressEntities.add(toAddressEntity(adressAPI));
+            addressEntities.add(toAddressEntity(addressAPI));
         }
         return addressEntities;
     }
+
+
+  
 }
