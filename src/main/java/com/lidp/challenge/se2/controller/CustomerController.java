@@ -26,23 +26,23 @@ public class CustomerController {
   private final AddressService addressService;
 
   @Autowired
-  public CustomerController(CustomerService customerService) {
+  public CustomerController(CustomerService customerService,AddressService addressService) {
     this.customerService = customerService;
     this.addressService = addressService;
   }
 
   @PostMapping("/customers")
-  public void save(@RequestBody CustomerEntity customerEntity) {
-    this.customerService.save(customerEntity);
+  public void save(@RequestBody CustomerAPI customerAPI) {
+    this.customerService.save(customerAPI);
   }
 
   @GetMapping("/customers")
-  public List<CustomerEntity> findAll() {
+  public List<CustomerAPI> findAll() {
     return this.customerService.findAll();
   }
 
   @GetMapping("/customers/{id}")
-  public CustomerEntity findById(@PathVariable Integer id) {
+  public CustomerAPI findById(@PathVariable Integer id) {
     return this.customerService.findById(id);
   }
 
@@ -51,19 +51,19 @@ public class CustomerController {
     this.customerService.deleteById(id);
   }
 
-  @PostMapping ("/addresses/{id}")
-  public void addAddress(@PathVariable Integer id,@RequestBody AddressEntity addressEntity){
-    this.addressService.addAddress(id,addressEntity);
+  @PostMapping ("/customers/{id}/addresses")
+  public void addAddress(@PathVariable Integer id,@RequestBody AddressAPI addressAPI){
+    this.addressService.addAddress(id,addressAPI);
 
   }
 
   @GetMapping ("/addresses")
-  public List <AddressEntity> findAllAddresses(){
+  public List <AddressAPI> findAllAddresses(){
     return this.addressService.findAllAddresses();
   }
 
-  @GetMapping("/addresses/{id}")
-  public List <AddressEntity> findAddressesById(@PathVariable Integer id){
+  @GetMapping("/customers/{id}/addresses")
+  public List <AddressAPI> findAddressesById(@PathVariable Integer id){
     return this.addressService.findAddresses(id);
   }
 

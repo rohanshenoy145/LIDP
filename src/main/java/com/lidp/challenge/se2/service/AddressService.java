@@ -29,7 +29,7 @@ public class AddressService {
     }
     
     public void addAddress(final Integer customerId, AddressAPI addressAPI ){
-        CustomerEntity customer = this.customerRepository.findById(customerId);
+        CustomerEntity customer = this.customerRepository.findById(customerId).orElse(null);
         if customer == null{
             throw new RuntimeException("Customer with ID " + customerId + " does not exist");
 
@@ -44,7 +44,7 @@ public class AddressService {
     }
 
     public List <AddressAPI> findAddresses(final Integer customerId){
-        CustomerEntity customer = this.customerRepository.findById(customerId);
+        CustomerEntity customer = this.customerRepository.findById(customerId).orElse(null);
         if customer == null{
             throw new RuntimeException("Customer with ID " + customerId + " does not exist");
 
@@ -63,7 +63,7 @@ public class AddressService {
 
     }
     public void deleteAddress(final Integer addressId){
-        AddressEntity address = this.addressRepository.findById(addressId);
+        AddressEntity address = this.addressRepository.findById(addressId).orElse(null);
         if address == null{
             throw new RuntimeException("Address with ID " + addressId + " does not exist");
         }
