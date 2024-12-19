@@ -51,7 +51,7 @@ public class AddressMapper{
         AddressEntity addressEntity = addressRepository.findById(addressAPI.getId()).orElse(null);
         if addressEntity == null{
             addressEntity = new AddressEntity()
-            addressEntity.setId(addressAPI.getId());
+            //id will be assigned upon generated when saved in database
             addressEntity.setStreetName(addressAPI.getStreetName());
             addressEntity.setCityName(addressAPI.getCityName());
             addressEntity.setStateName(addressAPI.getStateName());

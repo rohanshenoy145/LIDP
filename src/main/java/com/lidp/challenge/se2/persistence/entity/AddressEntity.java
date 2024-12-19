@@ -14,7 +14,6 @@ import java.util.ArrayList;
 public class AddressEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  
   @Column
   private int id;
 

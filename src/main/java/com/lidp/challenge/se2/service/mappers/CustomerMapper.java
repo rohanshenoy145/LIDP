@@ -40,7 +40,7 @@ public class CustomerMapper{
     public List <CustomerAPI> toCustomerAPIList(List<CustomerEntity> customerEntities){
         List<CustomerAPI> customerAPIs = new ArrayList<>();
         for(CustomerEntity customerEntity : customerEntities){
-            customerAPIs.add(toCustomerAPI(cusomterEntity));
+            customerAPIs.add(toCustomerAPI(customerEntity));
         }
         return customerAPIs;
  
@@ -48,9 +48,9 @@ public class CustomerMapper{
 
     public CustomerEntity toCustomerEntity(CustomerAPI customerAPI){
         CustomerEntity customerEntity =  customerRepository.findById(customerAPI.getId()).orElse(null);
-        if customerEntity = null{
+        if (customerEntity = null){
             customerEntity = new CustomerEntity()
-            customerEntity.setId(customerAPI.getId());
+            //id will be assigned by generated when saved in database
             customerEntity.setName(customerAPI.getName());
             //addresses initially empty 
         }

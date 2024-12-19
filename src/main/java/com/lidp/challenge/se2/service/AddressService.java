@@ -10,51 +10,60 @@ import com.lidp.challenge.se2.domain.CustomerAPI;
 import com.lidp.challenge.se2.domain.AddressAPI;
 import java.util.List;
 import java.util.ArrayList;
+import com.lidp.challenge.se2.service.mapper.CustomerMapper;
+import com.lidp.challenge.se2.service.mapper.AddressMapper;
 
 
 
-import java.util.List;
+
 @Service
 public class AddressService {
     final AddressRepository addressRepository;
     final CustomerRepository customerRepository;
+    final AddressMapper addressMapper;
     @Autowired
-    public AddressService(CustomerRepository customerRepository,AddressRepository addressRepository) {
+    public AddressService(CustomerRepository customerRepository,AddressRepository addressRepository,AddressMapper addressMapper) {
         this.customerRepository = customerRepository;
         this.addressRepository = addressRepository;
+        this.addressMapper = addressMapper;
     }
     
-    public void addAddress(final Integer customerId, AddressEntity addressEntity ){
+    public void addAddress(final Integer customerId, AddressAPI addressAPI ){
         CustomerEntity customer = this.customerRepository.findById(customerId);
         if customer == null{
             throw new RuntimeException("Customer with ID " + customerId + " does not exist");
 
         }
+        AddressEntity addressEntity = addressMapper.toAddressEntity(addressAPI);
         addressEntity.setCustomer(customer);
-        customer.getAddresses().add(addressEntity);
-        customer.setAddresses(customer.getAddresses());
+        List<AddressEntity> addressEntities = customer.getAddresses();
+        addressEntities.add(addressEntity);
+        customer.setAddresses(addressEntities);
         this.customerRepository.save(customer);
         this.addressRepository.save(addressEntity);
     }
 
-    public List <AddressEntity> findAddresses(final Integer customerId){
+    public List <AddressAPI> findAddresses(final Integer customerId){
         CustomerEntity customer = this.customerRepository.findById(customerId);
         if customer == null{
             throw new RuntimeException("Customer with ID " + customerId + " does not exist");
 
         }
-        return customer.getAddresses();
+        List <AddressEntity> addressEntities =  customer.getAddresses();
+        return addressMapper.toAddressAPIList(addressEntities);
 
 
     }
 
-    public List <AddressEntity> findAllAddresses(final Integer customerId){
-        return (List<AddressEntity>) this.addressRepository.findAll();  
+    public List <AddressAPI> findAllAddresses(final Integer customerId){
+        List<AddressEntity> addressEntities = (List<AddressEntity>) this.addressRepository.findAll();  
+        return addressMapper.toAddressAPIList(addressEntities);
+
 
 
     }
     public void deleteAddress(final Integer addressId){
-        AddressEntity address = this.addressRepository.findById(addressId)
+        AddressEntity address = this.addressRepository.findById(addressId);
         if address == null{
             throw new RuntimeException("Address with ID " + addressId + " does not exist");
         }
