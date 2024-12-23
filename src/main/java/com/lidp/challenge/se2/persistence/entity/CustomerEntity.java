@@ -24,6 +24,8 @@ public class CustomerEntity {
   @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
   private List <AddressEntity> customerAddresses;
 
+  @OneToMany(mappedBy = "customer",cascade = CascadeType.ALL,orphanRemoval = true)
+  private List <SalesEntity> customerSales;
   
   public int getId() {
     return id;
