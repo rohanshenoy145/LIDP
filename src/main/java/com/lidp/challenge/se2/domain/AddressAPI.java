@@ -1,5 +1,7 @@
 import java.util.List;
 package com.lidp.challenge.se2.domain;
+import com.lidp.challenge.se2.domain.CustomerAPI;
+
 
 public class AddressAPI{
     private int id;
@@ -57,6 +59,6 @@ public class AddressAPI{
     this.customer = customer;
 
   }
-  
+
 
 }

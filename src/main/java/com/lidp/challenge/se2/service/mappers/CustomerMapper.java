@@ -6,8 +6,13 @@ import com.lidp.challenge.se2.domain.CustomerAPI;
 import com.lidp.challenge.se2.service.mapper.AddressMapper;
 import java.util.List;
 import java.util.ArrayList;
+import com.lidp.challenge.se2.persistence.dao.CustomerRepository;
+import com.lidp.challenge.se2.persistence.dao.AddressRepository;
+import com.lidp.challenge.se2.persistence.dao.SalesRepository;
 
 
+
+@Component
 public class CustomerMapper{
 
     final AddressRepository addressRepository;
