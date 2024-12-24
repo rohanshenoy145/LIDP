@@ -51,6 +51,16 @@ public class CustomerEntity {
     this.customerAddresses = customerAddresses
   }
 
+  public List<SalesEntity> getSales(){
+    return customerSales;
+  }
+
+  public void setSales(List<SalesEntity>customerSales){
+    this.customerSales = customerSales;
+  }
+
+  
+
 
 
 

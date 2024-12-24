@@ -1,8 +1,11 @@
 package com.lidp.challenge.se2.service.mapper;
-import com.lidp.challenge.se2.domain.AddressAPI;
 import com.lidp.challenge.se2.persistence.entity.AddressEntity;
 import com.lidp.challenge.se2.persistence.entity.CustomerEntity;
+import com.lidp.challenge.se2.persistence.entity.SalesEntity;
+import com.lidp.challenge.se2.domain.AddressAPI;
 import com.lidp.challenge.se2.domain.CustomerAPI;
+import com.lidp.challenge.se2.domain.SalesAPI;
+
 import com.lidp.challenge.se2.service.mapper.AddressMapper;
 import java.util.List;
 import java.util.ArrayList;
@@ -38,7 +41,17 @@ public class CustomerMapper{
             addressAPI.setZipCode(addressEntity.getZipCode());
             addresses.add(addressAPI);
         }
+        List <SalesAPI> sales = new ArrayList<>();
+        for(SalesEntity salesEntity: customerEntity.getSales()){
+            SalesAPI salesAPI = new SalesAPI();
+            salesAPI.setId(salesEntity.getId());
+            salesAPI.setAmount(salesEntity.getAmount());
+            salesAPI.setDate(salesEntity.getDate());
+            sales.add(salesAPI);
+
+        }
         customerAPI.setAddresses(addresses);
+        customerAPI.setSales(sales);
         return customerAPI;
     }
 
@@ -58,6 +71,7 @@ public class CustomerMapper{
             //id will be assigned by generated when saved in database
             customerEntity.setName(customerAPI.getName());
             //addresses initially empty 
+            //sales initially empty
         }
         return customerEntity;
     }
