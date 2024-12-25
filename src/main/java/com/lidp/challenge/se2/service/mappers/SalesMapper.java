@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import com.lidp.challenge.se2.persistence.dao.CustomerRepository;
 import com.lidp.challenge.se2.persistence.dao.AddressRepository;
 import com.lidp.challenge.se2.persistence.dao.SalesRepository;
+import java.time.LocalDate;
+
 
 
 

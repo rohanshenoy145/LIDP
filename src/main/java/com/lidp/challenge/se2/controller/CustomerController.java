@@ -2,7 +2,12 @@ package com.lidp.challenge.se2.controller;
 
 import com.lidp.challenge.se2.persistence.entity.CustomerEntity;
 import com.lidp.challenge.se2.persistence.entity.AddressEntity;
+import com.lidp.challenge.se2.persistence.entity.SalesEntity;
+
 import com.lidp.challenge.se2.service.CustomerService;
+import com.lidp.challenge.se2.service.AddressService;
+import com.lidp.challenge.se2.service.SalesService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,22 +18,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.lidp.challenge.se2.domain.CustomerAPI;
 import com.lidp.challenge.se2.domain.AddressAPI;
+import com.lidp.challenge.se2.domain.SalesAPI;
 import java.util.List;
 import java.util.ArrayList;
 
-
-import java.util.List;
 
 @RestController
 @RequestMapping("")
 public class CustomerController {
   private final CustomerService customerService;
   private final AddressService addressService;
+  private final SalesService   salesService;
 
   @Autowired
-  public CustomerController(CustomerService customerService,AddressService addressService) {
+  public CustomerController(CustomerService customerService,AddressService addressService,SalesService salesService) {
     this.customerService = customerService;
     this.addressService = addressService;
+    this.salesService = salesService;
   }
 
   @PostMapping("/customers")
@@ -71,6 +77,43 @@ public class CustomerController {
   public void deleteAddress(@PathVariable Integer id){
     this.addressService.deleteAddress(id);
   }
+
+
+  @PostMapping ("/customers/{id}/sales")
+  public void addSale(@PathVariable Integer id,@RequestBody SalesAPI salesAPI){
+    this.salesService.addSale(id,salesAPI);
+
+  }
+
+  @GetMapping ("/customers/{id}/sales")
+  public List <SalesAPI> findSales(@PathVariable Integer id){
+    return this.salesService.findSales(id);
+  }
+
+  @GetMapping ("/customers/{id}/sales/total")
+  public BigDecimal findTotalSales(@PathVariable Integer id){
+    return this.salesService.getTotalSalesByCustomer(id);
+  }
+  
+  @GetMapping ("/sales/date/total")
+  public BigDecimal findTotalSalesDate(@RequestParam("start") String startDateStr, @RequestParam("end") String endDateStr){
+    LocalDate startDate = LocalDate.parse(startDateStr);  
+    LocalDate endDate = LocalDate.parse(endDateStr);
+    return this.salesService.getTotalSalesByDate(startDate,endDate);
+  
+  }
+
+  @GetMapping ("/sales/date")
+  public List <SalesAPI> findSalesDate(@RequestParam("start") String startDateStr, @RequestParam("end") String endDateStr){
+    LocalDate startDate = LocalDate.parse(startDateStr);  // Parsing the dates from query params
+    LocalDate endDate = LocalDate.parse(endDateStr);
+    return this.salesService.getSalesByDate(startDate,endDate);
+  }
+
+
+
+
+
 
 
 

@@ -3,6 +3,7 @@ import com.lidp.challenge.se2.persistence.dao.AddressRepository;
 import com.lidp.challenge.se2.persistence.entity.AddressEntity;
 import com.lidp.challenge.se2.persistence.entity.CustomerEntity;
 import com.lidp.challenge.se2.persistence.entity.SalesEntity;
+import java.time.LocalDate;
 
 import com.lidp.challenge.se2.persistence.dao.CustomerRepository;
 import com.lidp.challenge.se2.persistence.dao.SalesRepository;
