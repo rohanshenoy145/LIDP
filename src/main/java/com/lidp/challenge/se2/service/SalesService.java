@@ -45,7 +45,7 @@ public class SalesService{
         List <SalesEntity> salesEntities = customer.getSales();
         salesEntities.add(salesEntity);
         customer.setSales(salesEntities);
-        this.customerRepository.save(customer);
+        //this.customerRepository.save(customer);
         this.salesRepository.save(salesEntity); 
     }
 
@@ -107,5 +107,19 @@ public class SalesService{
 
 
     }
+    public void deleteSale(final Integer saleId){
+        SalesEntity sale = this.salesRepository.findById(saleId).orElse(null);
+        if (sale == null){
+            throw new RuntimeException("sale with ID " + saleId + " does not exist");
+        }
+        CustomerEntity customerEntity = sale.getCustomer();
+        customerEntity.getSales().remove(sale); //should delete from database too due to orphanage
+        this.customerRepository.save(customerEntity);
+
+
+
+    }
+
+
 
 }

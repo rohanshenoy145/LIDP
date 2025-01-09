@@ -5,6 +5,7 @@ import com.lidp.challenge.se2.service.AddressService;
 import com.lidp.challenge.se2.service.SalesService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import com.lidp.challenge.se2.domain.CustomerAPI;
 import com.lidp.challenge.se2.domain.AddressAPI;
@@ -88,19 +89,26 @@ public class CustomerController {
   }
   
   @GetMapping ("/sales/date/total")
-  public BigDecimal findTotalSalesDate(@RequestParam("start") String startDateStr, @RequestParam("end") String endDateStr){
-    LocalDate startDate = LocalDate.parse(startDateStr);
-    LocalDate endDate = LocalDate.parse(endDateStr);
+  public BigDecimal findTotalSalesDate(@RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                       @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate){
     return this.salesService.getTotalSalesByDate(startDate,endDate);
   
   }
 
   @GetMapping ("/sales/date")
-  public List <SalesAPI> findSalesDate(@RequestParam("start") String startDateStr, @RequestParam("end") String endDateStr){
-    LocalDate startDate = LocalDate.parse(startDateStr);  // Parsing the dates from query params
-    LocalDate endDate = LocalDate.parse(endDateStr);
+  public List <SalesAPI> findSalesDate(@RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                       @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate){
+
     return this.salesService.getSalesByDate(startDate,endDate);
   }
+
+
+  @DeleteMapping("/sales/{id}")
+  public void deleteSale(@PathVariable Integer id){
+    this.salesService.deleteSale(id);
+  }
+
+
 
 
 

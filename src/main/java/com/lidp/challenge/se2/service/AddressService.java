@@ -34,12 +34,13 @@ public class AddressService {
             throw new RuntimeException("Customer with ID " + customerId + " does not exist");
 
         }
+
         AddressEntity addressEntity = addressMapper.toAddressEntity(addressAPI);
         addressEntity.setCustomer(customer);
         List<AddressEntity> addressEntities = customer.getAddresses();
         addressEntities.add(addressEntity);
         customer.setAddresses(addressEntities);
-        this.customerRepository.save(customer);
+        //this.customerRepository.save(customer);
         this.addressRepository.save(addressEntity);
     }
 
@@ -74,4 +75,6 @@ public class AddressService {
 
         
     }
+
+
 }
