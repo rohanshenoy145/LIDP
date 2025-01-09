@@ -1,11 +1,7 @@
 package com.lidp.challenge.se2.persistence.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -48,7 +44,7 @@ public class CustomerEntity {
   }
 
   public void setAddresses(List<AddressEntity>customerAddresses){
-    this.customerAddresses = customerAddresses
+    this.customerAddresses = customerAddresses;
   }
 
   public List<SalesEntity> getSales(){

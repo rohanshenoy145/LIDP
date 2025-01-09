@@ -1,5 +1,6 @@
-import java.util.List;
 package com.lidp.challenge.se2.domain;
+
+import java.util.List;
 import com.lidp.challenge.se2.domain.CustomerAPI;
 
 

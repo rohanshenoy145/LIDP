@@ -10,8 +10,8 @@ import com.lidp.challenge.se2.domain.CustomerAPI;
 import com.lidp.challenge.se2.domain.AddressAPI;
 import java.util.List;
 import java.util.ArrayList;
-import com.lidp.challenge.se2.service.mapper.CustomerMapper;
-import com.lidp.challenge.se2.service.mapper.AddressMapper;
+import com.lidp.challenge.se2.service.mappers.CustomerMapper;
+import com.lidp.challenge.se2.service.mappers.AddressMapper;
 
 
 
@@ -30,7 +30,7 @@ public class AddressService {
     
     public void addAddress(final Integer customerId, AddressAPI addressAPI ){
         CustomerEntity customer = this.customerRepository.findById(customerId).orElse(null);
-        if customer == null{
+        if (customer == null){
             throw new RuntimeException("Customer with ID " + customerId + " does not exist");
 
         }
@@ -45,7 +45,7 @@ public class AddressService {
 
     public List <AddressAPI> findAddresses(final Integer customerId){
         CustomerEntity customer = this.customerRepository.findById(customerId).orElse(null);
-        if customer == null{
+        if (customer == null){
             throw new RuntimeException("Customer with ID " + customerId + " does not exist");
 
         }
@@ -55,7 +55,7 @@ public class AddressService {
 
     }
 
-    public List <AddressAPI> findAllAddresses(final Integer customerId){
+    public List <AddressAPI> findAllAddresses(){
         List<AddressEntity> addressEntities = (List<AddressEntity>) this.addressRepository.findAll();  
         return addressMapper.toAddressAPIList(addressEntities);
 
@@ -64,7 +64,7 @@ public class AddressService {
     }
     public void deleteAddress(final Integer addressId){
         AddressEntity address = this.addressRepository.findById(addressId).orElse(null);
-        if address == null{
+        if (address == null){
             throw new RuntimeException("Address with ID " + addressId + " does not exist");
         }
         CustomerEntity customerEntity = address.getCustomer();

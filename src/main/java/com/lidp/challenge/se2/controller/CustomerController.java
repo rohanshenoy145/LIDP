@@ -1,26 +1,18 @@
-package com.lidp.challenge.se2.controller;
-
-import com.lidp.challenge.se2.persistence.entity.CustomerEntity;
-import com.lidp.challenge.se2.persistence.entity.AddressEntity;
-import com.lidp.challenge.se2.persistence.entity.SalesEntity;
+package  com.lidp.challenge.se2.controller;
 
 import com.lidp.challenge.se2.service.CustomerService;
 import com.lidp.challenge.se2.service.AddressService;
 import com.lidp.challenge.se2.service.SalesService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.lidp.challenge.se2.domain.CustomerAPI;
 import com.lidp.challenge.se2.domain.AddressAPI;
 import com.lidp.challenge.se2.domain.SalesAPI;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.ArrayList;
 
 
 @RestController
@@ -97,7 +89,7 @@ public class CustomerController {
   
   @GetMapping ("/sales/date/total")
   public BigDecimal findTotalSalesDate(@RequestParam("start") String startDateStr, @RequestParam("end") String endDateStr){
-    LocalDate startDate = LocalDate.parse(startDateStr);  
+    LocalDate startDate = LocalDate.parse(startDateStr);
     LocalDate endDate = LocalDate.parse(endDateStr);
     return this.salesService.getTotalSalesByDate(startDate,endDate);
   

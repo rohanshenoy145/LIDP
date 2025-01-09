@@ -10,8 +10,8 @@ import com.lidp.challenge.se2.domain.CustomerAPI;
 import com.lidp.challenge.se2.domain.AddressAPI;
 import java.util.List;
 import java.util.ArrayList;
-import com.lidp.challenge.se2.service.mapper.CustomerMapper;
-import com.lidp.challenge.se2.service.mapper.AddressMapper;
+import com.lidp.challenge.se2.service.mappers.CustomerMapper;
+import com.lidp.challenge.se2.service.mappers.AddressMapper;
 
 
 

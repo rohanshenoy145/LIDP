@@ -1,17 +1,16 @@
-package com.lidp.challenge.se2.service.mapper;
+package com.lidp.challenge.se2.service.mappers;
 import com.lidp.challenge.se2.domain.AddressAPI;
 import com.lidp.challenge.se2.persistence.entity.AddressEntity;
 import com.lidp.challenge.se2.persistence.entity.CustomerEntity;
 import com.lidp.challenge.se2.domain.CustomerAPI;
-import com.lidp.challenge.se2.service.mapper.CustomerMapper;
+import com.lidp.challenge.se2.service.mappers.CustomerMapper;
 import java.util.List;
 import java.util.ArrayList;
 import com.lidp.challenge.se2.persistence.dao.CustomerRepository;
 import com.lidp.challenge.se2.persistence.dao.AddressRepository;
 import com.lidp.challenge.se2.persistence.dao.SalesRepository;
-
-
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 @Component
@@ -54,7 +53,7 @@ public class AddressMapper{
 
     public AddressEntity toAddressEntity(AddressAPI addressAPI){
         AddressEntity addressEntity = addressRepository.findById(addressAPI.getId()).orElse(null);
-        if addressEntity == null{
+        if (addressEntity == null){
             addressEntity = new AddressEntity();
             //id will be assigned upon generated when saved in database
             addressEntity.setStreetName(addressAPI.getStreetName());

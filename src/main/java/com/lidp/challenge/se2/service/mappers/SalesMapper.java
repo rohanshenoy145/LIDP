@@ -1,15 +1,18 @@
-package com.lidp.challenge.se2.service.mapper;
+package com.lidp.challenge.se2.service.mappers;
 import com.lidp.challenge.se2.persistence.entity.SalesEntity;
 import com.lidp.challenge.se2.persistence.entity.CustomerEntity;
 import com.lidp.challenge.se2.domain.CustomerAPI;
 import com.lidp.challenge.se2.domain.SalesAPI;
 
-import com.lidp.challenge.se2.service.mapper.CustomerMapper;
+import com.lidp.challenge.se2.service.mappers.CustomerMapper;
 import java.util.List;
 import java.util.ArrayList;
 import com.lidp.challenge.se2.persistence.dao.CustomerRepository;
 import com.lidp.challenge.se2.persistence.dao.AddressRepository;
 import com.lidp.challenge.se2.persistence.dao.SalesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.time.LocalDate;
 
 

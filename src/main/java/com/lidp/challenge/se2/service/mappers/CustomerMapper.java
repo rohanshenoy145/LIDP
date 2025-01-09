@@ -1,4 +1,4 @@
-package com.lidp.challenge.se2.service.mapper;
+package com.lidp.challenge.se2.service.mappers;
 import com.lidp.challenge.se2.persistence.entity.AddressEntity;
 import com.lidp.challenge.se2.persistence.entity.CustomerEntity;
 import com.lidp.challenge.se2.persistence.entity.SalesEntity;
@@ -6,13 +6,14 @@ import com.lidp.challenge.se2.domain.AddressAPI;
 import com.lidp.challenge.se2.domain.CustomerAPI;
 import com.lidp.challenge.se2.domain.SalesAPI;
 
-import com.lidp.challenge.se2.service.mapper.AddressMapper;
+import com.lidp.challenge.se2.service.mappers.AddressMapper;
 import java.util.List;
 import java.util.ArrayList;
 import com.lidp.challenge.se2.persistence.dao.CustomerRepository;
 import com.lidp.challenge.se2.persistence.dao.AddressRepository;
 import com.lidp.challenge.se2.persistence.dao.SalesRepository;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 @Component
@@ -66,8 +67,8 @@ public class CustomerMapper{
 
     public CustomerEntity toCustomerEntity(CustomerAPI customerAPI){
         CustomerEntity customerEntity =  customerRepository.findById(customerAPI.getId()).orElse(null);
-        if (customerEntity = null){
-            customerEntity = new CustomerEntity()
+        if (customerEntity == null){
+            customerEntity = new CustomerEntity();
             //id will be assigned by generated when saved in database
             customerEntity.setName(customerAPI.getName());
             //addresses initially empty 

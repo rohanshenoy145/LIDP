@@ -1,8 +1,5 @@
-import java.util.List;
 package com.lidp.challenge.se2.domain;
-import com.lidp.challenge.se2.domain.CustomerAPI;
 
-import java.util.ArrayList;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -16,7 +13,7 @@ public class SalesAPI{
     return this.id;
   }
 
-  public int setId(int id){
+  public void setId(int id){
     this.id = id;
   }
 
@@ -36,7 +33,7 @@ public class SalesAPI{
     this.date = date;
   }
 
-  public CustomerEntity getCustomer(){
+  public CustomerAPI getCustomer(){
     return this.customer;
   }
 

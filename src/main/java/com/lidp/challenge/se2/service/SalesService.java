@@ -3,6 +3,9 @@ import com.lidp.challenge.se2.persistence.dao.AddressRepository;
 import com.lidp.challenge.se2.persistence.entity.AddressEntity;
 import com.lidp.challenge.se2.persistence.entity.CustomerEntity;
 import com.lidp.challenge.se2.persistence.entity.SalesEntity;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 import com.lidp.challenge.se2.persistence.dao.CustomerRepository;
@@ -16,9 +19,9 @@ import com.lidp.challenge.se2.domain.SalesAPI;
 
 import java.util.List;
 import java.util.ArrayList;
-import com.lidp.challenge.se2.service.mapper.CustomerMapper;
-import com.lidp.challenge.se2.service.mapper.AddressMapper;
-import com.lidp.challenge.se2.service.mapper.SalesMapper;
+import com.lidp.challenge.se2.service.mappers.CustomerMapper;
+import com.lidp.challenge.se2.service.mappers.AddressMapper;
+import com.lidp.challenge.se2.service.mappers.SalesMapper;
 
 @Service
 public class SalesService{
@@ -74,7 +77,7 @@ public class SalesService{
     }
     //second
     public List<SalesAPI> getSalesByDate(LocalDate startDate,LocalDate endDate){
-        List<SalesEntity> salesEntities = salesRepository.findAll();  
+        List<SalesEntity> salesEntities = (List<SalesEntity>) salesRepository.findAll();
         List<SalesAPI> salesAPI = new ArrayList<>();
         for(SalesEntity salesEntity: salesEntities){
             LocalDate date = salesEntity.getDate();
@@ -88,7 +91,7 @@ public class SalesService{
     }
     //third
     public BigDecimal getTotalSalesByDate(LocalDate startDate,LocalDate endDate){
-        List<SalesEntity> salesEntities = salesRepository.findAll();  
+        List<SalesEntity> salesEntities = (List<SalesEntity>) salesRepository.findAll();
         BigDecimal total = BigDecimal.ZERO;
         for(SalesEntity salesEntity:salesEntities){
             LocalDate date = salesEntity.getDate();
